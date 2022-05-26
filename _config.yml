@@ -1,10 +1,10 @@
 title: 浮枕星海
-subtitle: ''
-description: ''
-keywords: null
-author: John Doe
-language: en
-timezone: ''
+subtitle: '浮枕 blog'
+description: '浮枕个人博客'
+keywords: blog
+author: 浮枕
+language: zh-cn
+timezone: 'Asia/Shanghai'
 url: https://universesaurora.top
 permalink: ':year/:month/:day/:title/'
 permalink_defaults: null
@@ -21,6 +21,7 @@ i18n_dir: ':lang'
 skip_render: null
 new_post_name: ':title.md'
 default_layout: post
+auto_spacing: true
 titlecase: false
 external_link:
   enable: true
@@ -32,28 +33,29 @@ post_asset_folder: false
 relative_link: false
 future: true
 highlight:
-  enable: true
-  line_number: true
+  enable: false
+  line_number: false
   auto_detect: false
   tab_replace: ''
-  wrap: true
+  wrap: false
   hljs: false
 prismjs:
-  enable: false
+  enable: true
   preprocess: true
   line_number: true
+  line_threshold: 2
   tab_replace: ''
 index_generator:
   path: ''
   per_page: 10
   order_by: '-date'
-default_category: uncategorized
+default_category: 未分类
 category_map: null
 tag_map: null
 meta_generator: true
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
-updated_option: mtime
+updated_option: date
 per_page: 10
 pagination_dir: page
 include: null
@@ -62,3 +64,50 @@ ignore: null
 theme: icarus
 deploy:
   type: ''
+
+markdown:
+  preset: 'default'
+  render:
+    html: true
+    xhtmlOut: false
+    langPrefix: 'language-'
+    breaks: true
+    linkify: true
+    typographer: true
+    quotes: '“”‘’'
+  anchors:
+    level: 2
+    collisionSuffix: ''
+    permalink: false
+    permalinkClass: 'header-anchor'
+    permalinkSide: 'left'
+    permalinkSymbol: '¶'
+    case: 0
+    separator: '-'
+  plugins:
+    - markdown-it-abbr
+    - markdown-it-cjk-breaks
+    - markdown-it-container
+    - markdown-it-deflist
+    - markdown-it-emoji
+    - markdown-it-footnote
+    - markdown-it-ins
+    - markdown-it-mark
+    - markdown-it-sub
+    - markdown-it-sup
+    - markdown-it-anchor
+    - markdown-it-attrs
+    - markdown-it-table-of-contents
+
+feed:
+  enable: true
+  type: atom
+  path: atom.xml
+  limit: 20
+  order_by: -date
+  autodiscovery: true
+
+sitemap:
+  path: sitemap.xml
+  tags: true
+  categories: true
