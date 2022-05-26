@@ -3,7 +3,7 @@ subtitle: '浮枕 blog'
 description: '浮枕个人博客'
 keywords: blog
 author: 浮枕
-language: zh-cn
+language: zh-CN
 timezone: 'Asia/Shanghai'
 url: https://universesaurora.top
 permalink: ':year/:month/:day/:title/'
