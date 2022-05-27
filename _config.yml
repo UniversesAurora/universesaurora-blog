@@ -111,3 +111,11 @@ sitemap:
   path: sitemap.xml
   tags: true
   categories: true
+
+# Security
+encrypt: # hexo-blog-encrypt
+  abstract: 文章已加密
+  message: 请输入密码
+  wrong_pass_message: 密码错误
+  wrong_hash_message: 验证错误
+  theme: wave
