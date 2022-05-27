@@ -1843,7 +1843,7 @@ a.list-item {
 }
 .menu-list a.is-active {
   background-color: #eef3fc;
-  color: #3273dc;
+  color: #b86bff;
 }
 .menu-list li ul {
   border-left: 1px solid #dbdbdb;
