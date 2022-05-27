@@ -12,7 +12,7 @@ Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [docume
 ``` bash
 $ hexo new "My New Post"
 ```
-
+中文测试f发的卡拉覅骄傲就啊绕进入哇iIowai奥委会发哈我i回复哈 地位 我i带哦啊啊渠道获取亲卫队请问来到清华
 💯:1234::new_moon::yum:
 
 More info: [Writing](https://hexo.io/docs/writing.html)
