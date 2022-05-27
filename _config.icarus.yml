@@ -225,19 +225,19 @@ widgets:
         position: left
         type: profile
         # Author name
-        author: Your name
+        author: 浮枕
         # Author title
-        author_title: Your title
+        author_title: Kernel panic at 0x467573696f6e
         # Author's current location
-        location: Your location
+        location: 中央図書館断絶の壁分室
         # URL or path to the avatar image
         avatar: /avatar.png
         # Whether show the rounded avatar image
-        avatar_rounded: false
+        avatar_rounded: true
         # Email address for the Gravatar
         gravatar: 
         # URL or path for the follow button
-        follow_link: https://github.com/ppoffice
+        follow_link: https://twitter.com/universesaurora
         # Links to be shown on the bottom of the profile widget
         social_links:
             Github:
