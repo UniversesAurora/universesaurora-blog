@@ -25,7 +25,7 @@ jobs:
         run: npm install
       - name: Customize theme
         run: |
-          sed -i "0,/default: fontcdn(.*)/{s//default: fontcdn('family=Source+Serif+Pro\\&family=Roboto+Mono\\&family=Noto+Serif+SC', 'css2')/}" node_modules/hexo-theme-icarus/layout/common/head.jsx
+          sed -i "0,/default: fontcdn(.*)/{s//default: fontcdn('Source+Serif+Pro\\&family=Roboto+Mono\\&family=Noto+Serif+SC', 'css2')/}" node_modules/hexo-theme-icarus/layout/common/head.jsx
           sed -i "0,/\$family-sans-serif ?= Ubuntu, Roboto, 'Open Sans', 'Microsoft YaHei', sans-serif/{s//\$family-sans-serif ?= 'Source Serif Pro', 'Source Han Serif SC', 'Noto Serif CJK SC', 'Noto Serif SC', serif/}" node_modules/hexo-theme-icarus/include/style/base.styl
           sed -i "0,/\$family-code ?= 'Source Code Pro', monospace, 'Microsoft YaHei'/{s//\$family-code ?= 'Roboto Mono', monospace, 'Source Serif Pro', 'Source Han Serif SC', 'Noto Serif CJK SC', 'Noto Serif SC', serif/}" node_modules/hexo-theme-icarus/include/style/base.styl
           sed -i "0,/\$primary ?= \$blue/{s//\$primary ?= \$purple/}" node_modules/hexo-theme-icarus/include/style/base.styl
