@@ -12,17 +12,17 @@ head:
     # https://developer.mozilla.org/en-US/docs/Web/Manifest
     manifest:
         # Name of the web application (default to the site title)
-        name: 
+        name: 浮枕星海
         # The displayed name of the web application
         # when there is not enough space to display full name
-        short_name: 
+        short_name: 浮枕
         # The start URL of the web application
-        start_url: 
+        start_url: https://universesaurora.top/
         # The default theme color for the application
-        theme_color: 
+        theme_color: "#9932CC"
         # A placeholder background color for the application page to display
         # before its stylesheet is loaded
-        background_color: 
+        background_color: "#9932CC"
         # The preferred display mode for the website
         display: standalone
         # Image files that can serve as application icons for different contexts
@@ -100,41 +100,49 @@ head:
         # E.g., name=theme-color;content=#123456 => <meta name="theme-color" content="#123456">
         - ''
     # URL or path to the website's RSS atom.xml
-    rss: 
+    rss: /atom.xml
 # Page top navigation bar configurations
 navbar:
     # Navigation menu items
     menu:
-        Home: /
-        Archives: /archives
-        Categories: /categories
-        Tags: /tags
-        About: /about
+        首页: /
+        归档: /archives
+        分类: /categories
+        标签: /tags
+        友链: /links
+        关于: /about
     # Links to be shown on the right of the navigation bar
     links:
-        Download on GitHub:
-            icon: fab fa-github
-            url: https://github.com/ppoffice/hexo-theme-icarus
+        # Download on GitHub:
+        #     icon: fab fa-github
+        #     url: https://github.com/ppoffice/hexo-theme-icarus
 # Page footer configurations
 footer:
     # Links to be shown on the right of the footer section
     links:
-        Creative Commons:
-            icon: fab fa-creative-commons
-            url: https://creativecommons.org/
-        Attribution 4.0 International:
-            icon: fab fa-creative-commons-by
-            url: https://creativecommons.org/licenses/by/4.0/
-        Download on GitHub:
-            icon: fab fa-github
-            url: https://github.com/ppoffice/hexo-theme-icarus
+        # Creative Commons:
+        #     icon: fab fa-creative-commons
+        #     url: https://creativecommons.org/
+        # Attribution 4.0 International:
+        #     icon: fab fa-creative-commons-by
+        #     url: https://creativecommons.org/licenses/by/4.0/
+        # Download on GitHub:
+        #     icon: fab fa-github
+        #     url: https://github.com/ppoffice/hexo-theme-icarus
+        CC BY-NC-SA 4.0:
+            icon:
+              - fab fa-creative-commons
+              - fab fa-creative-commons-by
+              - fab fa-creative-commons-nc
+              - fab fa-creative-commons-sa
+            url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/'
 # Article related configurations
 article:
     # Code highlight settings
     highlight:
         # Code highlight themes
         # https://github.com/highlightjs/highlight.js/tree/master/src/styles
-        theme: atom-one-light
+        theme: xcode
         # Show copy code button
         clipboard: true
         # Default folding status of the code blocks. Can be "", "folded", "unfolded"
@@ -142,18 +150,31 @@ article:
     # Whether to show estimated article reading time
     readtime: true
     # Whether to show updated time. For "auto", shows article update time only when page.updated is set and it is different from page.date
-    update_time: true
+    update_time: auto
     # Article licensing block
     licenses:
+        # Creative Commons:
+        #     icon: fab fa-creative-commons
+        #     url: https://creativecommons.org/
+        # Attribution:
+        #     icon: fab fa-creative-commons-by
+        #     url: https://creativecommons.org/licenses/by/4.0/
+        # Noncommercial:
+        #     icon: fab fa-creative-commons-nc
+        #     url: https://creativecommons.org/licenses/by-nc/4.0/
+        'CC BY-NC-SA 4.0': 'https://creativecommons.org/licenses/by-nc-sa/4.0/'
         Creative Commons:
             icon: fab fa-creative-commons
-            url: https://creativecommons.org/
-        Attribution:
+            url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/'
+        CC BY:
             icon: fab fa-creative-commons-by
-            url: https://creativecommons.org/licenses/by/4.0/
-        Noncommercial:
+            url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/'
+        CC NC:
             icon: fab fa-creative-commons-nc
-            url: https://creativecommons.org/licenses/by-nc/4.0/
+            url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/'
+        CC SA:
+            icon: fab fa-creative-commons-sa
+            url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/'
 # Search plugin configurations
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Plugins/Search/
 search:
@@ -161,50 +182,57 @@ search:
 # Comment plugin configurations
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Plugins/Comment/
 comment:
-    type: disqus
-    # Disqus shortname
-    shortname: ''
+    type: gitalk
+    client_id: 0d93b8fa7142b6c21de0
+    client_secret: fd1449c0798a980110bd15b1a5e35ea3d590d9aa
+    repo: universesaurora-blog
+    owner: UniversesAurora
+    admin:
+        - UniversesAurora
+    per_page: 20                    # 可选填
+    enable_hotkey: true             # 可选填
+    language: zh-CN                 # 可选填
 # Donate plugin configurations
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Plugins/Donation/
 donates:
     # "Afdian.net" donate button configurations
-    -
-        type: afdian
-        # URL to the "Afdian.net" personal page
-        url: ''
+    # -
+    #     type: afdian
+    #     # URL to the "Afdian.net" personal page
+    #     url: ''
     # Alipay donate button configurations
     -
         type: alipay
         # Alipay qrcode image URL
-        qrcode: ''
+        qrcode: '/alipay.png'
     # "Buy me a coffee" donate button configurations
-    -
-        type: buymeacoffee
-        # URL to the "Buy me a coffee" page
-        url: ''
+    # -
+    #     type: buymeacoffee
+    #     # URL to the "Buy me a coffee" page
+    #     url: ''
     # Patreon donate button configurations
-    -
-        type: patreon
-        # URL to the Patreon page
-        url: ''
+    # -
+    #     type: patreon
+    #     # URL to the Patreon page
+    #     url: ''
     # Paypal donate button configurations
-    -
-        type: paypal
-        # Paypal business ID or email address
-        business: ''
-        # Currency code
-        currency_code: USD
+    # -
+    #     type: paypal
+    #     # Paypal business ID or email address
+    #     business: ''
+    #     # Currency code
+    #     currency_code: USD
     # Wechat donate button configurations
     -
         type: wechat
         # Wechat qrcode image URL
-        qrcode: ''
+        qrcode: 'wechat.png'
 # Share plugin configurations
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Plugins/Share/
 share:
     type: sharethis
     # URL to the ShareThis share plugin script
-    install_url: ''
+    install_url: 'https://platform-api.sharethis.com/js/sharethis.js#property=6291b3ba6ad7c40019490138&product=sop'
 # Sidebar configurations.
 # Please be noted that a sidebar is only visible when it has at least one widget
 sidebar:
@@ -225,40 +253,40 @@ widgets:
         position: left
         type: profile
         # Author name
-        author: Your name
+        author: 浮枕
         # Author title
-        author_title: Your title
+        author_title: Kernel panic at 0x467573696f6e
         # Author's current location
-        location: Your location
+        location: 中央図書館断絶の壁分室
         # URL or path to the avatar image
         avatar: /avatar.png
         # Whether show the rounded avatar image
-        avatar_rounded: false
+        avatar_rounded: true
         # Email address for the Gravatar
         gravatar: 
         # URL or path for the follow button
-        follow_link: https://github.com/ppoffice
+        follow_link: https://twitter.com/universesaurora
         # Links to be shown on the bottom of the profile widget
         social_links:
-            Github:
-                icon: fab fa-github
-                url: https://github.com/ppoffice
-            Facebook:
-                icon: fab fa-facebook
-                url: https://facebook.com
+            Telegram:
+                icon: fab fa-telegram
+                url: https://t.me/universesaurora
             Twitter:
                 icon: fab fa-twitter
-                url: https://twitter.com
-            Dribbble:
-                icon: fab fa-dribbble
-                url: https://dribbble.com
+                url: https://twitter.com/universesaurora
+            Github:
+                icon: fab fa-github
+                url: https://github.com/UniversesAurora
+            Email:
+                icon: fas fa-envelope
+                url: mailto://universesaurora@gmail.com
             RSS:
                 icon: fas fa-rss
-                url: /
+                url: /atom.xml
     # Table of contents widget configurations
     -
         # Where should the widget be placed, left sidebar or right sidebar
-        position: left
+        position: right
         type: toc
         # Whether to show the index of each heading
         index: true
@@ -266,53 +294,16 @@ widgets:
         collapsed: true
         # Maximum level of headings to show (1-6)
         depth: 3
-    # Recommendation links widget configurations
-    -
-        # Where should the widget be placed, left sidebar or right sidebar
-        position: left
-        type: links
-        # Names and URLs of the sites
-        links:
-            Hexo: https://hexo.io
-            Bulma: https://bulma.io
-    # Categories widget configurations
-    -
-        # Where should the widget be placed, left sidebar or right sidebar
-        position: left
-        type: categories
     # Recent posts widget configurations
     -
         # Where should the widget be placed, left sidebar or right sidebar
         position: left
         type: recent_posts
-    # Archives widget configurations
-    -
-        # Where should the widget be placed, left sidebar or right sidebar
-        position: left
-        type: archives
     # Tags widget configurations
     -
         # Where should the widget be placed, left sidebar or right sidebar
         position: left
         type: tags
-    # Google FeedBurner email subscription widget configurations
-    -
-        # Where should the widget be placed, left sidebar or right sidebar
-        position: left
-        type: subscribe_email
-        # Hint text under the email input
-        description: 
-        # Feedburner ID
-        feedburner_id: ''
-    # Google AdSense unit configurations
-    -
-        # Where should the widget be placed, left sidebar or right sidebar
-        position: left
-        type: adsense
-        # AdSense client ID
-        client_id: ''
-        # AdSense AD unit ID
-        slot_id: ''
     # Follow.it email subscription widget configurations
     -
         # Where should the widget be placed, left sidebar or right sidebar
@@ -321,9 +312,27 @@ widgets:
         # Hint text under the email input
         description: 
         # Subscription form action URL
-        action_url: ''
+        action_url: 'https://api.follow.it/subscription-form/a1BGa2tQbURTbStQandqbGNOeWgzcytQME9iVityYVNVaVVGR2N5NzlGZDFaWDlHYnRLc0hmczZrVDFOY3dzamVYTDFIdGZxOVgvNTJwRm5RNjlqVVN5RzBNK0M1RVBUOEhlZXUwOEtyWG8vRVhPRUR4RFZFeUdwbTArSE0vdmF8dkswd0lGYUxxRGM0RHpnd280RDBtT3JXenNZQ2N6RG5oeVNjMjVTNitlcz0=/8'
         # Feed claiming verification code
-        verification_code: ''
+        verification_code: '6w6wNNa9dLg34hkzxXZS'
+    # Recommendation links widget configurations
+    -
+        # Where should the widget be placed, left sidebar or right sidebar
+        position: left
+        type: links
+        # Names and URLs of the sites
+        links:
+            Moeka: https://MoeClue.com/
+    # Categories widget configurations
+    -
+        # Where should the widget be placed, left sidebar or right sidebar
+        position: right
+        type: categories
+    # Archives widget configurations
+    -
+        # Where should the widget be placed, left sidebar or right sidebar
+        position: right
+        type: archives
 # Plugin configurations
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Plugins/
 plugins:
@@ -343,7 +352,7 @@ plugins:
         tracking_id: 
     # BuSuanZi site/page view counter
     # https://busuanzi.ibruce.info
-    busuanzi: false
+    busuanzi: true
     # CNZZ statistics
     # https://www.umeng.com/web
     cnzz:
@@ -361,7 +370,7 @@ plugins:
         # Whether the popup should stay static regardless of the page scrolls
         static: false
         # Where on the screen the consent popup should display
-        position: bottom-left
+        position: bottom-right
         # URL to your site's cookie policy
         policyLink: https://www.cookiesandyou.com/
     # Enable the lightGallery and Justified Gallery plugins
@@ -370,7 +379,7 @@ plugins:
     # https://analytics.google.com
     google_analytics:
         # Google Analytics tracking ID
-        tracking_id: 
+        tracking_id: UA-172917863-2
     # Hotjar user feedback plugin
     # https://www.hotjar.com/
     hotjar:
@@ -381,10 +390,10 @@ plugins:
     katex: false
     # Enable the MathJax math typesetting support
     # https://www.mathjax.org/
-    mathjax: false
+    mathjax: true
     # Enable the Outdated Browser plugin
     # http://outdatedbrowser.com/
-    outdated_browser: false
+    outdated_browser: true
     # Show a progress bar at top of the page on page loading
     progressbar: true
     # Statcounter statistics
