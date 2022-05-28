@@ -129,7 +129,8 @@ footer:
         # Download on GitHub:
         #     icon: fab fa-github
         #     url: https://github.com/ppoffice/hexo-theme-icarus
-        CC BY-NC-SA 4.0:
+        'CC BY-NC-SA 4.0': 'https://creativecommons.org/licenses/by-nc-sa/4.0/'
+        CC BY-NC-SA 4.0 icons:
             icon:
               - fab fa-creative-commons
               - fab fa-creative-commons-by
@@ -255,7 +256,7 @@ widgets:
         # Author name
         author: 浮枕
         # Author title
-        author_title: Kernel panic at 0x467573696f6e
+        author_title: Kernel panic at 0xffff467573696f6e
         # Author's current location
         location: 中央図書館断絶の壁分室
         # URL or path to the avatar image
@@ -279,7 +280,7 @@ widgets:
                 url: https://github.com/UniversesAurora
             Email:
                 icon: fas fa-envelope
-                url: mailto://universesaurora@gmail.com
+                url: mailto:universesaurora@gmail.com
             RSS:
                 icon: fas fa-rss
                 url: /atom.xml
