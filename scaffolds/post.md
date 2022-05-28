@@ -9,6 +9,7 @@ categories:
 tags:
 - 默认
 toc: true
+comment: true
 ---
 
 <!-- more -->
