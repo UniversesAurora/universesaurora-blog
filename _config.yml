@@ -64,6 +64,9 @@ ignore: null
 theme: icarus
 deploy:
   type: ''
+toc:
+  max_depth: 10
+  wrap: true
 
 markdown:
   preset: 'default'
