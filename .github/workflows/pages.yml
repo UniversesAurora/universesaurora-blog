@@ -35,7 +35,6 @@ jobs:
           sed -i -z "0,/\.widget\n    \.menu-list\n        li\n            ul\n                margin-right: 0/{s//\.widget\n    \.menu-list\n        li\n            ul\n                margin-right: 0\n        a\n            transition: background-color 0\.3s ease-in-out/}" node_modules/hexo-theme-icarus/include/style/widget.styl
           sed -i "0,/border-radius: \\\$card-radius/{s//border-radius: \\\$card-radius\n    \\&:hover\n        box-shadow: 0 6px 15px rgba(0,0,0,0\.15), 0 0 1px rgba(0,0,0,0\.1)/}" node_modules/hexo-theme-icarus/include/style/card.styl
           sed -i "s/element\.style\.transition = 'opacity 0\.3s ease-out, transform 0\.3s ease-out';/element\.style\.transition = 'opacity 0\.3s ease-out, transform 0\.3s ease-out, box-shadow 0\.3s ease-in-out';/g" node_modules/hexo-theme-icarus/source/js/animation.js
-          cat node_modules/hexo-theme-icarus/include/style/widget.styl
       - name: Build
         run: npm run build
       - name: Deploy
