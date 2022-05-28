@@ -278,7 +278,7 @@ widgets:
                 icon: fab fa-github
                 url: https://github.com/UniversesAurora
             Email:
-                icon: fab fa-envelope
+                icon: fas fa-envelope
                 url: mailto://universesaurora@gmail.com
             RSS:
                 icon: fas fa-rss
