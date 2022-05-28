@@ -10762,6 +10762,9 @@ body > .section {
   overflow: visible;
   border-radius: 4px;
 }
+.card:hover {
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15), 0 0 1px rgba(0,0,0,0.1);
+}
 .card + .card,
 .card + .column-right-shadow {
   margin-top: 1.5rem;
