@@ -10,7 +10,7 @@ categories:
 tags:
 - 默认
 toc: true
-comments: true
+comment: true
 ---
 
 <!-- more -->

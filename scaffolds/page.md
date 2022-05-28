@@ -6,5 +6,5 @@ cover: /gallery/covers/cover.jpg
 thumbnail: /gallery/thumbnails/thumbnail.jpg
 description:
 toc: true
-comments: true
+comment: true
 ---
