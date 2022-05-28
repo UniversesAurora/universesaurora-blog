@@ -11343,6 +11343,9 @@ figure.highlight .section {
 .widget .menu-list li ul {
   margin-right: 0;
 }
+.widget .menu-list a {
+  transition: background-color 0.3s ease-in-out;
+}
 .widget .menu-list .level {
   margin-bottom: 0;
 }
