@@ -255,7 +255,7 @@ widgets:
         # Author name
         author: 浮枕
         # Author title
-        author_title: Kernel panic at 0x467573696f6e
+        author_title: Kernel panic at 0xffff467573696f6e
         # Author's current location
         location: 中央図書館断絶の壁分室
         # URL or path to the avatar image
