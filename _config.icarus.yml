@@ -129,7 +129,8 @@ footer:
         # Download on GitHub:
         #     icon: fab fa-github
         #     url: https://github.com/ppoffice/hexo-theme-icarus
-        CC BY-NC-SA 4.0:
+        'CC BY-NC-SA 4.0': 'https://creativecommons.org/licenses/by-nc-sa/4.0/'
+        CC BY-NC-SA 4.0 icons:
             icon:
               - fab fa-creative-commons
               - fab fa-creative-commons-by
