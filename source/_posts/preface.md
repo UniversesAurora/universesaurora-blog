@@ -20,6 +20,6 @@ comment: true
 
 之所以又建了这个博客是因为最近又觉得自己应该有一个能写些东西的地方，在已有的平台上写总感觉有些拘束，不如自己建一个更自由些。
 
-这个博客是用 Hexo 搭建的，托管在 github 上，相对方便一些。
+这个博客是用 [Hexo](https://hexo.io/zh-cn/) 搭建的，托管在 [github](https://github.com/UniversesAurora/universesaurora-blog) 上，相对方便一些。
 
 之后应该不会再把博客删掉了。
