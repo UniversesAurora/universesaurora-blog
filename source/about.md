@@ -15,7 +15,7 @@ toc: true
 
 很少看动画，但是很喜欢幾原邦彥。
 
-## 授权
+## 许可
 
 本站 logo 和 404 页面图片来源于 freepik，并经过修改。
 <a href="https://www.freepik.com/vectors/planet">Planet vector created by pikisuperstar - www.freepik.com</a>
