@@ -9,7 +9,6 @@ categories:
 tags:
 - 随笔
 toc: true
-comment: true
 ---
 
 总之是本博客的第一篇文章。
