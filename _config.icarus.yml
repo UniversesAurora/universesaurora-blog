@@ -48,7 +48,7 @@ head:
         url: 
         # Page cover (og:image) (optional)
         # You should leave this blank for most of the time
-        image: /img/og_image.png
+        image: 
         # Site name (og:site_name) (optional)
         # You should leave this blank for most of the time
         site_name: 
