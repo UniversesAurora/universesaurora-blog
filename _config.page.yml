@@ -24,7 +24,7 @@ widgets:
         # Author's current location
         location: 中央図書館断絶の壁分室
         # URL or path to the avatar image
-        avatar: /avatar.png
+        avatar: /img/avatar.png
         # Whether show the rounded avatar image
         avatar_rounded: true
         # Email address for the Gravatar
