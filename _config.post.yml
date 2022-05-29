@@ -43,7 +43,7 @@ widgets:
                 icon: fab fa-github
                 url: https://github.com/UniversesAurora
             BiliBili:
-                icon: fas fa-tv-retro
+                icon: fas fa-play
                 url: https://space.bilibili.com/211209824
             Email:
                 icon: fas fa-envelope
