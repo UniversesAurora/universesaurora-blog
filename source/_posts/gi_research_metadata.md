@@ -52,16 +52,72 @@ toc: true
 
 ![Process Monitor 记录](https://s2.loli.net/2022/06/10/VgBNwJjQX9mWU82.png)
 
-## UserAssembly.dll
+## 分析 UserAssembly.dll
 
-于是把 UserAssembly.dll 丢进 ida 分析了下。
+于是把 UserAssembly.dll 丢进 ida 分析了下。直接搜索字符串 global-metadata，找到了看起来可能是打开文件的地方：
 
-一测的metadata有mark已经不一样了
-找到异常抛出点回溯一下，header.metadataUsageListsCount为0，发现还是DecryptMetadataBlocks有问题，头部读出的信息错误
-DecryptMetadataBlocks开头的几个判断条件都是对的啊，看起来文件可能只被微调了
-以异或为主要逻辑加一点偏移
-上调试看看原神怎么算的 忘记了原神有壳 没法动态调试了 不熟
+![疑似打开文件](https://s2.loli.net/2022/06/10/ZbP5GaLAdsYv2D9.png)
+
+于是我参考了网上相关文章研究了下，怀疑到下面有一处调用的解密函数，这个函数初始化在一个导出函数中，其中还初始化了另一个函数。
+
+![初始化解密函数](https://s2.loli.net/2022/06/10/E4GAKo6kPxJReO8.png)
+
+不过解密函数目前来看都不在这个 dll 中，四处翻了翻后我就暂时结束了对 UserAssembly.dll 的探索。
+
+## 分析 Il2CppDumper
+
+接下来我把目光转向了 Il2CppDumper，想通过它分析下之前版本的 metadata 是怎么解密出来的（没找到这个被修改过的 Il2CppDumper 源码）。于是把他丢进 ida，搜索打印的 log 字符串 "Initializing metadata..."，很快我就发现了一个叫做 DecryptMetadata 的函数，显然是解密函数：
+
+![DecryptMetadata](https://s2.loli.net/2022/06/10/SQeip7WVCR6atUl.png)
+
+ida 好像反汇编不了 .net 的程序，换个反编译工具 dnSpy，这下源码基本完全解析出来了。首先动态调试了下，找到异常抛出的位置向前回溯，发现问题出自 header.metadataUsageListsCount 为 0，这个 header 又是通过之前解密的 metadata 数据初始化出来的，这样看 metadata 果然还是没有被正确解密。
+
+```aspx-csharp
+public static MetadataDecryption.StringDecryptionData DecryptMetadata(byte[] metadata)
+{
+	MetadataDecryption.DecryptMetadataBlocks(metadata);
+	return MetadataDecryption.DecryptMetadataStringInfo(metadata);
+}
+```
+
+细看第一个解密函数 DecryptMetadataBlocks，先是从文件后部复制了点数据，之后做了个比较。奇怪的是这个比较通过了，我又在二进制编辑器里对了下这个值，确实是对的，看来加密逻辑没有变动太多？
+
+```aspx-csharp 第一个解密函数
+private static void DecryptMetadataBlocks(byte[] metadata)
+  {
+   byte[] array = new byte[16384];
+   Buffer.BlockCopy(metadata, metadata.Length - array.Length, array, 0, array.Length);
+   if (array[200] != 46 || array[201] != 252 || array[202] != 254 || array[203] != 44)
+   {
+    throw new ArgumentException("*((uint32_t*)&footer[0xC8]) != 0x2CFEFC2E");
+   }
+```
+
+后面主要就是数据复制，用异或方法压缩出了一个 key，之后又异或了一堆奇怪的预定义的值。看来之前加密的逻辑主要还是异或，还用到了一些预先定义好的数据。到这里感觉从 Il2CppDumper 也不再能看出太多了。
+
+## 搭建主程序调试环境
+
+推测下解密函数很有可能应该在主程序 YuanShen.exe 里面了，研究了下找到个方法能通过调试器直接启动游戏本体进私服，方便之后调试。
+
+修改 GrassClipper 的 scripts/private_server_launch.cmd，找到这里：
+
+```
+:: Launch game
+"%GAME_PATH%"
+```
+
+把 `"%GAME_PATH%"` 这部分注释掉，加个pause。之后启动先把 grasscutter 服务端跑起来，然后在命令行运行这个脚本，带上下面这些参数：
 
 ```bash
 private_server_launch.cmd 127.0.0.1 443 true "<YuanShen.exe 路径>" "<GrassClipper 路径>" false true
 ```
+
+这里服务地址端口都是默认的配置，之后这个脚本会把代理开启来，接下来直接运行游戏本体就能进私服了，关闭记得在终端输入字符把剩下的关闭流程跑完，否则代理设置不会被清除掉没法正常联网。
+
+搭好调试环境后，我发现这游戏主程序加了壳的没法直接调试（废话），想在游戏过程中挂 x64dbg 也挂不上，不知道用了什么魔法，另外游戏会不断检查并尝试杀掉 x64dbg 等调试器，启动时也会检查，以及如果杀不掉甚至游戏直接退出。所以这个部分遇到了点困难。
+
+![本体有 vmp 壳](https://s2.loli.net/2022/06/10/JWm9QEqiTSVgLX3.png)
+
+这部分就触及到了我的知识盲区，先进行一波学习，之后会继续更新。
+
+待续...
