@@ -72,7 +72,7 @@ toc: true
 
 ida 好像反汇编不了 .net 的程序，换个反编译工具 dnSpy，这下源码基本完全解析出来了。首先动态调试了下，找到异常抛出的位置向前回溯，发现问题出自 header.metadataUsageListsCount 为 0，这个 header 又是通过之前解密的 metadata 数据初始化出来的，这样看 metadata 果然还是没有被正确解密。
 
-```aspx-csharp
+```csharp
 public static MetadataDecryption.StringDecryptionData DecryptMetadata(byte[] metadata)
 {
 	MetadataDecryption.DecryptMetadataBlocks(metadata);
@@ -82,7 +82,7 @@ public static MetadataDecryption.StringDecryptionData DecryptMetadata(byte[] met
 
 细看第一个解密函数 DecryptMetadataBlocks，先是从文件后部复制了点数据，之后做了个比较。奇怪的是这个比较通过了，我又在二进制编辑器里对了下这个值，确实是对的，看来加密逻辑没有变动太多？
 
-```aspx-csharp 第一个解密函数
+```csharp 第一个解密函数
 private static void DecryptMetadataBlocks(byte[] metadata)
   {
    byte[] array = new byte[16384];
