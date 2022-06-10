@@ -106,7 +106,7 @@ private static void DecryptMetadataBlocks(byte[] metadata)
 "%GAME_PATH%"
 ```
 
-把 `"%GAME_PATH%"` 这部分注释掉，加个pause。之后启动先把 grasscutter 服务端跑起来，然后在命令行运行这个脚本，带上下面这些参数：
+把 `"%GAME_PATH%"` 这部分注释掉，加个 pause。之后启动先把 grasscutter 服务端跑起来，然后在命令行运行这个脚本，带上下面这些参数：
 
 ```bash
 private_server_launch.cmd 127.0.0.1 443 true "<YuanShen.exe 路径>" "<GrassClipper 路径>" false true
