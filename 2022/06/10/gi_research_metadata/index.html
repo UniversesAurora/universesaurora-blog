@@ -34,8 +34,8 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:: Launch game</span><br><span class="line">&quot;%GAME_PATH%&quot;</span><br></pre></td></tr></table></figure>
 <p>把 <code>&quot;%GAME_PATH%&quot;</code> 这部分注释掉，加个pause。之后启动先把 grasscutter 服务端跑起来，然后在命令行运行这个脚本，带上下面这些参数：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private_server_launch.cmd 127.0.0.1 443 <span class="literal">true</span> <span class="string">&quot;&lt;YuanShen.exe 路径&gt;&quot;</span> <span class="string">&quot;&lt;GrassClipper 路径&gt;&quot;</span> <span class="literal">false</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>这里服务地址端口都是默认的配置，之后这个脚本会把代理开启来，接下来直接运行游戏本体就能进私服了，关闭记得在终端输入字符把剩下的关闭流程跑完，否则代理设置不会被清除掉没法正常联网。</p>
-<p>搭好调试环境后，我发现这游戏主程序加了壳的没法直接调试（废话），想在游戏过程中挂 x64dbg 也挂不上，不知道用了什么魔法，另外游戏会不断检查并尝试杀掉 x64dbg 等调试器，启动时也会检查，以及如果杀不掉甚至游戏直接退出。所以这个部分遇到了点困难。</p>
+<p>这里服务地址端口都是默认的配置，之后这个脚本会把代理开起来，接下来直接运行游戏本体就能进私服了，关闭记得在终端输入字符把剩下的关闭流程跑完，否则代理设置不会被清除掉没法正常联网。</p>
+<p>搭好调试环境后，我发现这游戏主程序加了壳的没法直接调试（废话），想在游戏过程中挂 x64dbg 也挂不上，不知道用了什么魔法。另外游戏会不断检查并尝试杀掉 x64dbg 等调试器，启动时也会检查，以及如果杀不掉甚至游戏直接退出。所以这个部分遇到了点困难。</p>
 <p><img src="https://s2.loli.net/2022/06/10/JWm9QEqiTSVgLX3.png" alt="本体有 vmp 壳"></p>
 <p>这部分就触及到了我的知识盲区，先进行一波学习，之后会继续更新。</p>
 <p>待续…</p>
