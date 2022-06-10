@@ -6,7 +6,7 @@
   <link href="https://universesaurora.top/atom.xml" rel="self"/>
   
   <link href="https://universesaurora.top/"/>
-  <updated>2022-05-29T03:22:33.000Z</updated>
+  <updated>2022-06-10T12:07:46.000Z</updated>
   <id>https://universesaurora.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>小探 GI global-metadata</title>
+    <link href="https://universesaurora.top/2022/06/10/gi_research_metadata/"/>
+    <id>https://universesaurora.top/2022/06/10/gi_research_metadata/</id>
+    <published>2022-06-10T12:07:34.000Z</published>
+    <updated>2022-06-10T12:07:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>算是博客的第一篇正式文章。</p><span id="more"></span>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;算是博客的第一篇正式文章。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="逆向" scheme="https://universesaurora.top/categories/%E9%80%86%E5%90%91/"/>
+    
+    
+    <category term="逆向" scheme="https://universesaurora.top/tags/%E9%80%86%E5%90%91/"/>
+    
+    <category term="游戏" scheme="https://universesaurora.top/tags/%E6%B8%B8%E6%88%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>序</title>
