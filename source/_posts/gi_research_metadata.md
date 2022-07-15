@@ -118,6 +118,82 @@ private_server_launch.cmd 127.0.0.1 443 true "<YuanShen.exe 路径>" "<GrassClip
 
 ![本体有 vmp 壳](https://s2.loli.net/2022/06/10/JWm9QEqiTSVgLX3.png)
 
-这部分就触及到了我的知识盲区，先进行一波学习，之后会继续更新。
+## 尝试新的 Il2CppDumper
 
-待续...
+回来更新文章了，发现已经有人更新了针对 2.7+ 版本的 Il2CppDumper^[[2.7+ 版本的 Il2CppDumper](https://github.com/1582421598/Il2CppDumper-Genshin)]，所以尝试直接用它替换掉原本的 Il2CppDumper。
+
+运行后 Il2CppDumper 成功生成了 DummyDll，但是还是有其他错误，下面是比较关键的部分：
+
+```
+[01:25:26.036] ------------------------------
+[01:25:26.037] Game Name: 原神
+[01:25:26.037] Game Developer: miHoYo
+[01:25:26.038] Unity Version: 2017.4.30f1
+[01:25:26.038] Game Version:
+[01:25:26.039] ------------------------------
+[01:25:26.379] Preferences Loaded!
+[01:25:26.398] [Il2CppUnityTls] Patching mono_unity_get_unitytls_interface...
+[01:25:26.401] Loading Plugins...
+
+[01:25:26.409] ------------------------------
+[01:25:26.409] No Plugins Loaded!
+[01:25:26.410] ------------------------------
+[libil2cpp] Failed to resolve 3441514353 at startup
+[libil2cpp] Failed to resolve 2641773275 at startup
+[libil2cpp] Failed to resolve 3753878500 at startup
+[libil2cpp] Failed to resolve 1688788800 at startup
+[libil2cpp] Failed to resolve 226400704 at startup
+[libil2cpp] Failed to resolve 58785463 at startup
+[libil2cpp] Failed to resolve 1939797683 at startup
+[libil2cpp] Failed to resolve 2903149294 at startup
+...
+
+[00:50:23.258] "C:\Users\Miguel\Downloads\gi-priv\games\gi_2.7.0_self\Genshin Impact Game\MelonLoader\Dependencies\Il2CppAssemblyGenerator\Il2CppAssemblyUnhollower\AssemblyUnhollower.exe" "--input=C:\Users\Miguel\Downloads\gi-priv\games\gi_2.7.0_self\Genshin Impact Game\MelonLoader\Dependencies\Il2CppAssemblyGenerator\Il2CppDumper\DummyDll" "--output=C:\Users\Miguel\Downloads\gi-priv\games\gi_2.7.0_self\Genshin Impact Game\MelonLoader\Dependencies\Il2CppAssemblyGenerator\Il2CppAssemblyUnhollower\Managed" "--mscorlib=C:\Users\Miguel\Downloads\gi-priv\games\gi_2.7.0_self\Genshin Impact Game\MelonLoader\Managed\mscorlib.dll" "--unity=C:\Users\Miguel\Downloads\gi-priv\games\gi_2.7.0_self\Genshin Impact Game\MelonLoader\Dependencies\Il2CppAssemblyGenerator\UnityDependencies" "--gameassembly=C:\Users\Miguel\Downloads\gi-priv\games\gi_2.7.0_self\Genshin Impact Game\YuanShen_Data\Native\UserAssembly.dll" "--add-prefix-to=ICSharpCode" "--add-prefix-to=Newtonsoft" "--add-prefix-to=TinyJson" "--add-prefix-to=Valve.Newtonsoft" "--no-xref-cache"
+[00:50:23.348] Reading assemblies... 
+[00:50:23.538] Done in 00:00:00.1889345
+[00:50:23.539] Reading system assemblies... 
+[00:50:23.552] Done in 00:00:00.0138266
+[00:50:23.553] Reading unity assemblies... 
+[00:50:23.563] Done in 00:00:00.0100095
+[00:50:23.564] Creating rewrite assemblies... 
+[00:50:23.584] Done in 00:00:00.0218627
+[00:50:23.585] Computing renames... 
+[00:50:23.616] [ERROR] 
+[00:50:23.657] [ERROR] 未经处理的异常:  Mono.Cecil.AssemblyResolutionException: Failed to resolve assembly: 'System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e'
+[00:50:23.658] [ERROR]    在 Mono.Cecil.BaseAssemblyResolver.Resolve(AssemblyNameReference name, ReaderParameters parameters)
+[00:50:23.659] [ERROR]    在 Mono.Cecil.DefaultAssemblyResolver.Resolve(AssemblyNameReference name)
+[00:50:23.659] [ERROR]    在 Mono.Cecil.MetadataResolver.Resolve(TypeReference type)
+[00:50:23.660] [ERROR]    在 Mono.Cecil.TypeReference.Resolve()
+[00:50:23.661] [ERROR]    在 AssemblyUnhollower.Passes.Pass05CreateRenameGroups.NameOrRename(TypeReference typeRef, RewriteGlobalContext context)
+[00:50:23.662] [ERROR]    在 AssemblyUnhollower.Passes.Pass05CreateRenameGroups.GenericNameToStrings(TypeReference typeRef, RewriteGlobalContext context)
+[00:50:23.663] [ERROR]    在 AssemblyUnhollower.Passes.Pass05CreateRenameGroups.GetUnobfuscatedNameBase(RewriteGlobalContext context, TypeDefinition typeDefinition, Boolean allowExtraHeuristics)
+[00:50:23.664] [ERROR]    在 AssemblyUnhollower.Passes.Pass05CreateRenameGroups.ProcessType(RewriteGlobalContext context, TypeDefinition originalType, Boolean allowExtraHeuristics)
+[00:50:23.665] [ERROR]    在 AssemblyUnhollower.Passes.Pass05CreateRenameGroups.ProcessType(RewriteGlobalContext context, TypeDefinition originalType, Boolean allowExtraHeuristics)
+[00:50:23.665] [ERROR]    在 AssemblyUnhollower.Passes.Pass05CreateRenameGroups.DoPass(RewriteGlobalContext context)
+[00:50:23.666] [ERROR]    在 AssemblyUnhollower.Program.Main(UnhollowerOptions options)
+[00:50:23.667] [ERROR]    在 AssemblyUnhollower.Program.Main(String[] args)
+[00:50:25.289] Done in 00:00:01.7042110
+
+
+[00:50:25.370] Loading Mods...
+[00:50:25.389] [ERROR] No MelonInfoAttribute Found in C:\Users\Miguel\Downloads\gi-priv\games\gi_2.7.0_self\Genshin Impact Game\Mods\ClassLibrary3.dll
+
+...
+
+[00:50:25.499] [ERROR] Field internalEncoding was not found on class StreamWriter
+[00:50:25.500] [ERROR] Field internalStream was not found on class StreamWriter
+[00:50:25.502] [ERROR] Field iflush was not found on class StreamWriter
+[00:50:25.503] [ERROR] Field byte_buf was not found on class StreamWriter
+[00:50:25.504] [ERROR] Field byte_pos was not found on class StreamWriter
+[00:50:25.504] [ERROR] Field decode_buf was not found on class StreamWriter
+[00:50:25.505] [ERROR] Field decode_pos was not found on class StreamWriter
+[00:50:25.506] [ERROR] Field DisposedAlready was not found on class StreamWriter
+[00:50:25.506] [ERROR] Field preamble_done was not found on class StreamWriter
+[00:50:25.507] [ERROR] Field internalFormatProvider was not found on class TextWriter
+```
+
+这里放的 log 比较多，大部分内容在之前的 log 中也是有的，不同的部分在于 Il2CppDumper 生成 DummyDll 后接着又运行的 Il2CppAssemblyUnhollower 给出的错误。
+
+从 trace 来看 AssemblyUnhollower 又用到了 Mono.Cecil 这个库，在该库中抛出了一个异常。除此之外开头部分的 libil2cpp 也还不清楚是谁打印的，这部分错误从一开始就存在，且没有被写入 log 文件中，可能比较特殊。
+
+施工中...
