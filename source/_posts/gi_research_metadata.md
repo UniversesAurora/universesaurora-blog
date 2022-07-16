@@ -66,7 +66,7 @@ toc: true
 
 ## 分析 Il2CppDumper
 
-接下来我把目光转向了 Il2CppDumper，想通过它分析下之前版本的 metadata 是怎么解密出来的（没找到这个被修改过的 Il2CppDumper 源码）。于是把他丢进 ida，搜索打印的 log 字符串 "Initializing metadata..."，很快我就发现了一个叫做 DecryptMetadata 的函数，显然是解密函数：
+接下来我把目光转向了 Il2CppDumper，想通过它分析下之前版本的 metadata 是怎么解密出来的（没找到这个被修改过的 Il2CppDumper 源码）（更新：其实是有源码的，在另一个![仓库](https://github.com/Three-taile-dragon/MelonLoader-GenshinImpact)）。于是把他丢进 ida，搜索打印的 log 字符串 "Initializing metadata..."，很快我就发现了一个叫做 DecryptMetadata 的函数，显然是解密函数：
 
 ![DecryptMetadata](https://s2.loli.net/2022/06/10/SQeip7WVCR6atUl.png)
 
@@ -97,7 +97,7 @@ private static void DecryptMetadataBlocks(byte[] metadata)
 
 ## 搭建主程序调试环境
 
-推测下解密函数很有可能应该在主程序 YuanShen.exe 里面了，研究了下找到个方法能通过调试器直接启动游戏本体进私服，方便之后调试。
+推测下解密函数很有可能应该在主程序 YuanShen.exe 里面了，研究了下找到个方法能通过调试器直接启动游戏本体进私服，方便之后调试。（更新：其实只要用的是 Fiddler 这种抓包软件就行了，效果一样且更方便）
 
 修改 GrassClipper 的 scripts/private_server_launch.cmd，找到这里：
 
