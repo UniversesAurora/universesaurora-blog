@@ -22,7 +22,7 @@ toc: true
 
 想要在游戏中进行模型替换需要一个叫做 Melonloader 的框架，但这个框架在 2.7 版本中无法使用了^[[该问题的 Github Issue](https://github.com/lassedds/Melonloader-AnimeGaming/issues/3)]。查看产生的 log 可以发现该问题出在 Il2CppDumper 上：
 
-```
+```log
 ...
 [20:57:40.389] Executing Il2CppDumper...
 [20:57:40.392] "C:\Users\Miguel\Downloads\GrassCutPer\Genshin Impact\Genshin Impact Game\MelonLoader\Dependencies\Il2CppAssemblyGenerator\Il2CppDumper\Il2CppDumper.exe" "C:\Users\Miguel\Downloads\GrassCutPer\Genshin Impact\Genshin Impact Game\YuanShen_Data\Native\UserAssembly.dll" "C:\Users\Miguel\Downloads\GrassCutPer\Genshin Impact\Genshin Impact Game\YuanShen_Data\Native\Data\Metadata\global-metadata.dat"
@@ -84,13 +84,13 @@ public static MetadataDecryption.StringDecryptionData DecryptMetadata(byte[] met
 
 ```csharp 第一个解密函数
 private static void DecryptMetadataBlocks(byte[] metadata)
-  {
-   byte[] array = new byte[16384];
-   Buffer.BlockCopy(metadata, metadata.Length - array.Length, array, 0, array.Length);
-   if (array[200] != 46 || array[201] != 252 || array[202] != 254 || array[203] != 44)
-   {
-    throw new ArgumentException("*((uint32_t*)&footer[0xC8]) != 0x2CFEFC2E");
-   }
+{
+	byte[] array = new byte[16384];
+	Buffer.BlockCopy(metadata, metadata.Length - array.Length, array, 0, array.Length);
+	if (array[200] != 46 || array[201] != 252 || array[202] != 254 || array[203] != 44)
+	{
+ 		throw new ArgumentException("*((uint32_t*)&footer[0xC8]) != 0x2CFEFC2E");
+	}
 ```
 
 后面主要就是数据复制，用异或方法压缩出了一个 key，之后又异或了一堆奇怪的预定义的值。看来之前加密的逻辑主要还是异或，还用到了一些预先定义好的数据。到这里感觉从 Il2CppDumper 也不再能看出太多了。
@@ -101,7 +101,7 @@ private static void DecryptMetadataBlocks(byte[] metadata)
 
 修改 GrassClipper 的 scripts/private_server_launch.cmd，找到这里：
 
-```
+```bat
 :: Launch game
 "%GAME_PATH%"
 ```
@@ -124,7 +124,7 @@ private_server_launch.cmd 127.0.0.1 443 true "<YuanShen.exe 路径>" "<GrassClip
 
 运行后 Il2CppDumper 成功生成了 DummyDll，但是还是有其他错误，下面是比较关键的部分：
 
-```
+```log
 [01:25:26.036] ------------------------------
 [01:25:26.037] Game Name: 原神
 [01:25:26.037] Game Developer: miHoYo
@@ -196,4 +196,142 @@ private_server_launch.cmd 127.0.0.1 443 true "<YuanShen.exe 路径>" "<GrassClip
 
 从 trace 来看 AssemblyUnhollower 又用到了 Mono.Cecil 这个库，在该库中抛出了一个异常。除此之外开头部分的 libil2cpp 也还不清楚是谁打印的，这部分错误从一开始就存在，且没有被写入 log 文件中，可能比较特殊。
 
-施工中...
+于是我又从网上找了一个 [Il2CppAssemblyUnhollower 源码](https://gh.fakev.cn/RoflanProgers/Il2CppAssemblyUnhollower-GenshinImpact)，这个原仓库应该是没了，链接的是镜像站。抱着试一试的心态编译了一下，发现并没有出现类似报错，不过出现了 methods failed to restore 的情况，不知道是否正常。
+
+```log
+Reading assemblies...
+Done in 00:00:00.2249948
+Reading system assemblies...
+Done in 00:00:00.0138076
+Reading unity assemblies...
+Done in 00:00:00.0249082
+Creating rewrite assemblies...
+Done in 00:00:00.0095615
+Computing renames...
+Done in 00:00:00.0759375
+Creating typedefs...
+Done in 00:00:00.3707064
+Computing struct blittability...
+Done in 00:00:00.0270083
+Filling typedefs...
+Done in 00:00:00.0354803
+Filling generic constraints...
+Done in 00:00:00.0068350
+Creating members...
+Done in 00:00:04.5136379
+Scanning method cross-references...
+Done in 00:00:01.7303552
+Finalizing method declarations...
+Done in 00:00:10.2081680
+0 total potentially dead methods
+Filling method parameters...
+Done in 00:00:00.7021279
+Creating static constructors...
+Done in 00:00:02.1416967
+Creating value type fields...
+Done in 00:00:00.1698024
+Creating enums...
+Done in 00:00:00.0984626
+Creating IntPtr constructors...
+Done in 00:00:00.1559927
+Creating type getters...
+Done in 00:00:00.2090254
+Creating non-blittable struct constructors...
+Done in 00:00:00.0172973
+Creating generic method static constructors...
+Done in 00:00:00.0622003
+Creating field accessors...
+Done in 00:00:03.4009610
+Filling methods...
+Done in 00:00:03.5433611
+Generating implicit conversions...
+Done in 00:00:00.0293020
+Creating properties...
+Done in 00:00:00.2467474
+Unstripping types...
+Done in 00:00:00.0325269
+Unstripping fields...
+
+286 fields restored
+7 fields failed to restore
+Done in 00:00:00.0090604
+Unstripping methods...
+
+7760 methods restored
+213 methods failed to restore
+Done in 00:00:00.3213333
+Unstripping method bodies...
+
+IL unstrip statistics: 3567 successful, 594 failed
+Done in 00:00:00.1510770
+Generating forwarded types...
+Done in 00:00:00.0416483
+Writing xref cache...
+Done in 00:00:00.0073933
+Writing assemblies...
+Done in 00:00:10.7976969
+Writing method pointer map...
+Done in 00:00:00.1345476
+Done!
+```
+
+赶紧放到 MelonLoader 里试一下：
+
+```log
+[14:07:32.626] ------------------------------
+[14:07:32.627] 4 Mods Loaded
+[14:07:32.627] ------------------------------
+[14:07:32.628] Camera Tools v1.0.6
+[14:07:32.628] by portra
+[14:07:32.631] SHA256 Hash: 12464c1f24f4267a3f75afc6a26f2148b7b0fd6a7d2c9607f8dac0c91d20ac50
+[14:07:32.631] ------------------------------
+[14:07:32.632] HideUIScript v1.0.0
+[14:07:32.632] by Taiga74164
+[14:07:32.633] SHA256 Hash: 2b272e95f1062d01800c4da58f7dee800aeb8726a47ec2da02507bfa82c31640
+[14:07:32.634] ------------------------------
+[14:07:32.634] Model Changer v0.0.8
+[14:07:32.635] by portra
+[14:07:32.638] SHA256 Hash: dd7c505195b0ea8151945b7e1dc66a1583fa9488c6175808da6957fbe20ecde1
+[14:07:32.638] ------------------------------
+[14:07:32.638] UnityExplorer v4.9.0
+[14:07:32.639] by Sinai
+[14:07:32.663] SHA256 Hash: 09f49edd0be7c2c1aecbb892e360230094fd172acac51dce8f75557f3873946a
+[14:07:32.664] ------------------------------
+[14:07:32.668] [ERROR] No Support Module Loaded!
+```
+
+游戏成功启动，但是 UnityExplorer 并没有加载，log 如上，之前的错误中除了 libil2cpp 的报错都已经消失了。
+
+看这个错误是 mod 不受支持，在 MelonLoader 源码中找到了该打印的来源：
+
+```csharp MelonLoader\SupportModule\SupportModule.cs
+if (Interface == null)
+{
+	MelonLogger.Error("No Support Module Loaded!");
+	return false;
+}
+```
+
+在里面加了一些打印：
+
+```log
+[15:12:28.210] [ERROR] Found: System.Collections.Generic.List`1[MelonLoader.SupportModule+ModuleListing]
+[15:12:28.210] [ERROR] Found: C:\Users\Miguel\Downloads\gi-priv\games\gi_2.7.0_self\Genshin Impact Game\MelonLoader\Dependencies\SupportModules\Il2Cpp.dll
+[15:12:28.211] [ERROR] Loading: C:\Users\Miguel\Downloads\gi-priv\games\gi_2.7.0_self\Genshin Impact Game\MelonLoader\Dependencies\SupportModules\Il2Cpp.dll
+[15:12:28.213] [ERROR] Support Module [Il2Cpp.dll] threw an Exception: System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.IO.FileNotFoundException: Could not load file or assembly 'netstandard, Version=2.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51' or one of its dependencies.
+  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
+  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <e1319b7195c343e79b385cd3aa43f5dc>:0
+   --- End of inner exception stack trace ---
+  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00048] in <e1319b7195c343e79b385cd3aa43f5dc>:0
+  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <e1319b7195c343e79b385cd3aa43f5dc>:0
+  at MelonLoader.SupportModule.LoadInterface (System.String ModulePath) [0x00063] in <20bb3b548fca4badbe0683004df1b626>:0
+  at MelonLoader.SupportModule.Setup () [0x000c3] in <20bb3b548fca4badbe0683004df1b626>:0
+[15:12:28.214] [ERROR] Found: C:\Users\Miguel\Downloads\gi-priv\games\gi_2.7.0_self\Genshin Impact Game\MelonLoader\Dependencies\SupportModules\Mono.dll
+[15:12:28.217] [ERROR] No Support Module Loaded!
+```
+
+看起来是和 Il2Cpp.dll 有关。
+
+## 关于反调试
+
+之前稍微试着用 x64dbg 调试了下，感觉它应该是通过 mhypbase.dll 这个东西实现反调试的，由他加载 mhyprot2.Sys 和 mhyprot3.Sys 这两个驱动。用 ScyllaHide 的默认配置似乎会导致程序跳到0地址。这方面经验不多就不写了。
