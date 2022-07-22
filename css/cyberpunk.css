@@ -10766,9 +10766,6 @@ body > .section {
 .card:hover {
   box-shadow: 0 6px 15px rgba(0,0,0,0.15), 0 0 1px rgba(0,0,0,0.1);
 }
-.card:hover {
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15), 0 0 1px rgba(0,0,0,0.1);
-}
 .card + .card,
 .card + .column-right-shadow {
   margin-top: 1.5rem;
@@ -10944,6 +10941,9 @@ a.article-nav-next span {
 .navbar-main {
   box-shadow: none;
 }
+.navbar-main .navbar-container {
+  overflow-x: auto;
+}
 .navbar-main .navbar-menu,
 .navbar-main .navbar-start,
 .navbar-main .navbar-end {
@@ -10988,6 +10988,12 @@ a.article-nav-next span {
 }
 .navbar-logo img {
   max-height: 1.75rem;
+}
+@media screen and (min-width: 1400px) {
+  .navbar > .container .navbar-menu,
+  .container > .navbar .navbar-menu {
+    margin-right: 0rem;
+  }
 }
 @media screen and (max-width: 1099px) {
   footer.footer .level-start {
@@ -11335,6 +11341,9 @@ figure.highlight .section {
   min-width: inherit;
   border-radius: inherit;
 }
+figure.highlight.foldable div.level-left {
+  cursor: pointer;
+}
 .gist table tr:hover {
   background: transparent;
 }
@@ -11346,9 +11355,6 @@ figure.highlight .section {
 }
 .widget .menu-list li ul {
   margin-right: 0;
-}
-.widget .menu-list a {
-  transition: background-color 0.3s ease-in-out;
 }
 .widget .menu-list a {
   transition: background-color 0.3s ease-in-out;
