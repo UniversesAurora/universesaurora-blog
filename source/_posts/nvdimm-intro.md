@@ -2,8 +2,8 @@
 title: nvdimm 技术与编程模型概览
 date: 2022-07-18 16:45:16
 updated: 2022-07-27 16:53:05
-cover: https://s2.loli.net/2022/07/27/eA9tPcfz7vGSWCj.jpg
-thumbnail: https://s2.loli.net/2022/07/27/eA9tPcfz7vGSWCj.jpg
+cover: https://s2.loli.net/2022/07/27/qNvb2iJmUzGPH1t.png
+thumbnail: https://s2.loli.net/2022/07/27/qNvb2iJmUzGPH1t.png
 categories:
 - 硬件
 tags:
