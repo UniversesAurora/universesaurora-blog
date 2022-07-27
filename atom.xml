@@ -6,7 +6,7 @@
   <link href="https://universesaurora.top/atom.xml" rel="self"/>
   
   <link href="https://universesaurora.top/"/>
-  <updated>2022-07-18T08:45:24.000Z</updated>
+  <updated>2022-07-27T08:53:05.000Z</updated>
   <id>https://universesaurora.top/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://universesaurora.top/2022/07/18/nvdimm-intro/"/>
     <id>https://universesaurora.top/2022/07/18/nvdimm-intro/</id>
     <published>2022-07-18T08:45:16.000Z</published>
-    <updated>2022-07-18T08:45:24.000Z</updated>
+    <updated>2022-07-27T08:53:05.000Z</updated>
     
-    <content type="html"><![CDATA[<p>nvdimm，即非易失性双列直插式内存模块（non-volatile DIMM），相对于传统的易失性内存，nvdimm 在断电后其中的内容也不会消失。</p><span id="more"></span>]]></content>
+    <content type="html"><![CDATA[<p>nvdimm，即非易失性双列直插式内存模块（non-volatile DIMM），相对于传统的易失性内存，nvdimm 在断电后其中的内容也不会消失。</p><span id="more"></span><p>定义于 ACPI（NFIT），UEFI（BTT），带外通信使用 DSM。</p><p>交错本来是传统易失性内存中的一个概念。N 代表数字，和 N 通道不是一个概念，只有交错后才能叫做 N 路.</p><h3 id="pmem" tabindex="-1" id="PMEM">PMEM</h3><h4 id="dax" tabindex="-1" id="DAX">DAX</h4><h4 id="btt" tabindex="-1" id="BTT">BTT</h4><h3 id="%E5%AE%9E%E7%8E%B0" tabindex="-1" id="实现">实现</h3><p>Linux 上关于持久内存的配置概念方面曾经有过一些变动，本章节将以本文撰写时最新内核和工具的支持情况为基础。</p>]]></content>
     
     
     <summary type="html">&lt;p&gt;nvdimm，即非易失性双列直插式内存模块（non-volatile DIMM），相对于传统的易失性内存，nvdimm 在断电后其中的内容也不会消失。&lt;/p&gt;</summary>
