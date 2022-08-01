@@ -1,7 +1,7 @@
 ---
 title: nvdimm 技术与编程模型概览
 date: 2022-07-18 16:45:16
-updated: 2022-07-27 16:53:05
+updated: 2022-08-01 11:12:26
 cover: https://s2.loli.net/2022/07/27/qNvb2iJmUzGPH1t.png
 thumbnail: https://s2.loli.net/2022/07/27/qNvb2iJmUzGPH1t.png
 categories:
@@ -22,7 +22,7 @@ nvdimm，即非易失性双列直插式内存模块（non-volatile DIMM），相
 
 ## 理论
 
-本节参考 [Programming Models for Emerging Non-Volatile Memory Technologies](https://www.usenix.org/system/files/login/articles/08_rudoff_040-045_final.pdf) 和 [Persistent Memory Programming](https://www.usenix.org/system/files/login/articles/login_summer17_07_rudoff.pdf) 这两篇文章，讲几种理论上的持久化内存编程模型和有关的问题。文章中的 NVM 泛指各种非易失性内存设备。
+本节参考 [Programming Models for Emerging Non-Volatile Memory Technologies](https://www.usenix.org/system/files/login/articles/08_rudoff_040-045_final.pdf) 和 [Persistent Memory Programming](https://www.usenix.org/system/files/login/articles/login_summer17_07_rudoff.pdf) 这两篇文章，讲述几种理论上的持久化内存编程模型和有关的问题。文章中的 NVM 泛指各种非易失性内存设备。
 
 ### 编程模型
 
@@ -56,7 +56,7 @@ NVM File Mode 模式中主要关注的是应用程序和文件系统间的文件
 
 PM File Mode 看起来和 NVM File Mode 有些相似，但不同的是这里的文件系统是感知 PM 的，可以看到这种文件系统就是通过上文的 PM Volume Mode 模型实现的。
 
-感知 PM 的文件系统提供了所有传统文件系统会提供的文件接口，实际上它通常通过在已有的文件系统的基础上扩展 PM 感知能力来实现的。
+感知 PM 的文件系统提供了所有传统文件系统会提供的文件接口，实际上它通常通过在已有的文件系统的基础上扩展 PM 感知能力来实现的。这种模式最主要的特点是，在使用 mmap 将一个文件 map 到内存空间时，应用程序可以绕过内核直接 load/store 持久内存，而在传统文件系统中文件 mmap 到内存中时需要使用 page cache 机制。
 
 持久内存层的引入为应用程序开发人员提供了放置数据和数据结构的位置的新选择。传统上，数据被读取和写入易失性内存，然后刷新到非易失性持久存储。当应用程序启动时，必须先将数据从存储器中读取到易失性存储器中，然后才能对其进行访问。根据工作数据集的大小，这可能需要几秒钟、几分钟或几小时。通过巧妙的应用程序设计，开发人员和应用程序架构师现在可以利用这项新技术来提高性能并减少应用程序启动时间。
 持久内存引入了一些新的编程问题，这些问题不适用于传统的易失性内存。包括：
