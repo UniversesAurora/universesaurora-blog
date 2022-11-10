@@ -16,6 +16,15 @@ toc: true
 
 最近尝试了一下原神私服，在弄模型替换的时候出了点问题，正好借此机会对游戏做一点探索。
 
+<article class="message message-immersive is-warning">
+<div class="message-body">
+<i class="fas fa-exclamation-triangle mr-2"></i>
+内容已过时！
+
+距本文撰写时已过去较长时间，最新版本的游戏保护方式已经升级，且这篇文章主要是我自己鼓捣的记录，目前已经没有什么价值了。
+</div>
+</article>
+
 <!-- more -->
 
 ## 起因
@@ -335,3 +344,5 @@ if (Interface == null)
 ## 关于反调试
 
 之前稍微试着用 x64dbg 调试了下，感觉它应该是通过 mhypbase.dll 这个东西实现反调试的，由他加载 mhyprot2.Sys 和 mhyprot3.Sys 这两个驱动。用 ScyllaHide 的默认配置似乎会导致程序跳到0地址。这方面经验不多就不写了。
+
+更新：由于有其他事情很长时间没有再研究这个问题，之后应该不会更新这篇文章了。如果有新进展会另开一篇。
