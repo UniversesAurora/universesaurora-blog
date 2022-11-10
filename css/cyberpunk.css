@@ -10766,9 +10766,6 @@ body > .section {
 .card:hover {
   box-shadow: 0 6px 15px rgba(0,0,0,0.15), 0 0 1px rgba(0,0,0,0.1);
 }
-.card:hover {
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15), 0 0 1px rgba(0,0,0,0.1);
-}
 .card + .card,
 .card + .column-right-shadow {
   margin-top: 1.5rem;
@@ -11358,9 +11355,6 @@ figure.highlight.foldable div.level-left {
 }
 .widget .menu-list li ul {
   margin-right: 0;
-}
-.widget .menu-list a {
-  transition: background-color 0.3s ease-in-out;
 }
 .widget .menu-list a {
   transition: background-color 0.3s ease-in-out;
