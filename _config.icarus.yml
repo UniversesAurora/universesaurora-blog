@@ -418,6 +418,6 @@ providers:
     # Name or URL template of the JavaScript and/or stylesheet CDN provider
     cdn: loli
     # Name or URL template of the webfont CDN provider
-    fontcdn: loli
+    fontcdn: ustc
     # Name or URL of the fontawesome icon font CDN provider
     iconcdn: loli
