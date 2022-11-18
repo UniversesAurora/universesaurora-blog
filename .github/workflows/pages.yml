@@ -42,6 +42,9 @@ jobs:
           sed -i "0,/\\\$fullhd ?=.*/{s//\\\$fullhd ?= 1920px/}" node_modules/hexo-theme-icarus/include/style/base.styl
       - name: Build
         run: npm run build
+      - name: Post modification
+        run: |
+          sed -i -z "0,/article\.article \.content {\n  word-wrap: break-word;\n  font-size: 1\.1/{s//article\.article \.content {\n  word-wrap: break-word;\n  font-size: 1\.2/}" public/css/default.css
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
