@@ -10765,6 +10765,9 @@ body > .section {
 .card:hover {
   box-shadow: 0 6px 15px rgba(0,0,0,0.15), 0 0 1px rgba(0,0,0,0.1);
 }
+.card:hover {
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15), 0 0 1px rgba(0,0,0,0.1);
+}
 .card + .card,
 .card + .column-right-shadow {
   margin-top: 1.5rem;
@@ -10816,7 +10819,7 @@ article.article .article-meta {
 }
 article.article .content {
   word-wrap: break-word;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 article.article .content h1 {
   font-size: 1.75em;
@@ -11358,6 +11361,9 @@ figure.highlight.foldable div.level-left {
 .widget .menu-list a {
   transition: background-color 0.3s ease-in-out;
 }
+.widget .menu-list a {
+  transition: background-color 0.3s ease-in-out;
+}
 .widget .menu-list .level {
   margin-bottom: 0;
 }
@@ -11573,9 +11579,6 @@ figure.highlight.foldable div.level-left {
   line-height: inherit;
 }
 .MathJax,
-.MathJax_Display,
-.MJXc-display,
-.MathJax_SVG_Display,
 .katex-display {
   overflow-x: auto;
   overflow-y: hidden;
