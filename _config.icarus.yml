@@ -327,6 +327,7 @@ widgets:
         # Names and URLs of the sites
         links:
             Moeka: https://MoeClue.com/
+            小莫のBase: https://mou.best
     # Categories widget configurations
     -
         # Where should the widget be placed, left sidebar or right sidebar
