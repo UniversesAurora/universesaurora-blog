@@ -1,7 +1,7 @@
 ---
 title: nvdimm 技术与编程模型概览
 date: 2022-07-18 16:45:16
-updated: 2022-08-01 11:12:26
+updated: 2023-04-18 13:49:02
 cover: https://s2.loli.net/2022/07/27/qNvb2iJmUzGPH1t.png
 thumbnail: https://s2.loli.net/2022/07/27/qNvb2iJmUzGPH1t.png
 categories:
@@ -13,6 +13,15 @@ toc: true
 ---
 
 nvdimm，即非易失性双列直插式内存模块（non-volatile DIMM），相对于传统的易失性内存，nvdimm 在断电后其中的内容也不会消失。
+
+<article class="message message-immersive is-primary">
+<div class="message-body">
+<i class="fas fa-drafting-compass mr-2"></i>
+施工中
+
+咕咕咕！
+</div>
+</article>
 
 <!-- more -->
 
