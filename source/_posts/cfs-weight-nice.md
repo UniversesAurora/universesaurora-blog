@@ -10,8 +10,9 @@ tags:
 - 内核
 - 调度器
 toc: true
-comment: true
 ---
+
+盘一盘在学习 CFS 调度器过程中的一些感想。
 
 <article class="message message-immersive is-primary">
 <div class="message-body">
