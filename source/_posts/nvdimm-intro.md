@@ -17,7 +17,7 @@ nvdimm，即非易失性双列直插式内存模块（non-volatile DIMM），相
 <article class="message message-immersive is-primary">
 <div class="message-body">
 <i class="fas fa-drafting-compass mr-2"></i>
-施工中
+施工中！！！
 
 咕咕咕！
 </div>
