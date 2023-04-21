@@ -1,14 +1,15 @@
 ---
 title: CFS调度器、权重、优先级与虚拟时钟
 date: 2023-04-20 21:47:32
-updated: 2023-04-20 21:47:38
-cover: https://s2.loli.net/2022/05/28/haZ3CUmo9sqfNrw.jpg
-thumbnail: https://s2.loli.net/2022/05/28/haZ3CUmo9sqfNrw.jpg
+updated: 2023-04-21 10:25:04
+cover: https://cdn.pixabay.com/photo/2016/08/26/12/44/houses-1622066_1280.jpg
+thumbnail: https://cdn.pixabay.com/photo/2016/08/26/12/44/houses-1622066_1280.jpg
 categories:
 - 内核
 tags:
 - 内核
 - 调度器
+- Linux
 toc: true
 ---
 
