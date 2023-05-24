@@ -5,7 +5,7 @@ updated: 2023-05-19 20:33:45
 cover: https://cdn.pixabay.com/photo/2023/05/15/15/33/landscape-7995369_1280.jpg
 thumbnail: https://cdn.pixabay.com/photo/2023/05/15/15/33/landscape-7995369_1280.jpg
 categories:
-- 随笔
+- 杂谈
 tags:
 - vscode
 - clangd
