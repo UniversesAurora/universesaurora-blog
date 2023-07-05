@@ -45,6 +45,7 @@ jobs:
       - name: Post modification
         run: |
           sed -i -z "0,/article\.article \.content {\n  word-wrap: break-word;\n  font-size: 1\.1/{s//article\.article \.content {\n  word-wrap: break-word;\n  font-size: 1\.2/}" public/css/default.css
+          sed -i 's/rel="noopener" title="Mastodon" href="https:\/\/mastodon.social\/@universesaurora"/rel="me" title="Mastodon" href="https:\/\/mastodon.social\/@universesaurora"/g' public/index.html
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
