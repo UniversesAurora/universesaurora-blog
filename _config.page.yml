@@ -36,15 +36,15 @@ widgets:
             Telegram:
                 icon: fab fa-telegram
                 url: https://t.me/universesaurora
+            Mastodon:
+                icon: fab fa-mastodon
+                url: https://mastodon.social/@universesaurora
             Twitter:
                 icon: fab fa-twitter
                 url: https://twitter.com/universesaurora
             Github:
                 icon: fab fa-github
                 url: https://github.com/UniversesAurora
-            BiliBili:
-                icon: fas fa-play
-                url: https://space.bilibili.com/211209824
             Email:
                 icon: fas fa-envelope
                 url: mailto:universesaurora@gmail.com
