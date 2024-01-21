@@ -93,13 +93,6 @@ comment:
     per_page: 20
     enable_hotkey: true
     language: zh-CN
-donates:
-    -
-        type: alipay
-        qrcode: /img/alipay.png
-    -
-        type: wechat
-        qrcode: /img/wechat.png
 share:
     type: sharethis
     install_url: https://platform-api.sharethis.com/js/sharethis.js#property=6291b3ba6ad7c40019490138&product=sop
