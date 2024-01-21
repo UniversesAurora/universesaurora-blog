@@ -67,6 +67,7 @@ article:
         fold: unfolded
     readtime: true
     update_time: auto
+    updated_auto_hide: true
     licenses:
         CC BY-NC-SA 4.0: https://creativecommons.org/licenses/by-nc-sa/4.0/
         Creative Commons:
