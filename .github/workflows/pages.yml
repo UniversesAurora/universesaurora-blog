@@ -46,6 +46,11 @@ jobs:
         run: |
           sed -i -z "0,/article\.article \.content {\n  word-wrap: break-word;\n  font-size: 1\.1/{s//article\.article \.content {\n  word-wrap: break-word;\n  font-size: 1\.3/}" public/css/default.css
           sed -i 's/rel="noopener" title="Mastodon" href="https:\/\/mastodon.social\/@universesaurora"/rel="me" title="Mastodon" href="https:\/\/mastodon.social\/@universesaurora"/g' public/index.html
+      - name: HTML/CSS/JS Minifier
+        uses: docker://devatherock/minify-js:3.0.0
+        with:
+          directory: 'public'      # Optional
+          add_suffix: false     # Optional
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
