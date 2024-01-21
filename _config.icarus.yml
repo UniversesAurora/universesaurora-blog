@@ -195,6 +195,6 @@ plugins:
     twitter_conversion_tracking:
         pixel_id: 
 providers:
-    cdn: loli
-    fontcdn: ustc
-    iconcdn: loli
+    cdn: '[cdnjs]https://cdn.bootcdn.net/ajax/libs/${package}/${version}/${filename}'
+    fontcdn: 'https://fonts.googlefonts.cn/${type}?family=${fontname}'
+    iconcdn: 'https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.4/css/all.min.css'
