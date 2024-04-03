@@ -2,8 +2,8 @@
 title: {{ title }}
 date: {{ date }}
 updated: 2022-02-02 20:00:00
-cover: https://s2.loli.net/2022/05/28/haZ3CUmo9sqfNrw.jpg
-thumbnail: https://s2.loli.net/2022/05/28/haZ3CUmo9sqfNrw.jpg
+cover: https://cdn.pixabay.com/photo/2020/04/13/14/41/blue-rain-5038666_1280.jpg
+thumbnail: https://cdn.pixabay.com/photo/2020/04/13/14/41/blue-rain-5038666_1280.jpg
 toc: true
 comment: true
 ---

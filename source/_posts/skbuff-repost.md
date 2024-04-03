@@ -50,7 +50,7 @@ struct sk_buff_head {
 
 为了实现通过每个节点都能快速找到链表头，每个节点都会包含一个指向链表中唯一的 `sk_buff_head` 的指针（`list`）。
 
-![List of sk_buff elements](https://s2.loli.net/2023/04/21/zHdEn3NG4hPFiRk.jpg)
+![List of sk_buff elements](https://s2.loli.net/2024/04/03/QhEpcwg6iYrXJHk.png)
 
 下面是 layout 字段的详细解释：
 
@@ -85,7 +85,7 @@ struct sk_buff {
 
 `head` 、`end` 、`data` 和 `tail` 这 4个指针用来表示 buffer 中数据域的边界。当每一层为了任务而准备 buffer 时，为了协议头或数据，可能会分配更多的空间。 `head` 和 `end` 指向了 buffer 被分配的内存区域的开始和结束， `data` 和 `tail` 指向真实数据的开始和结束。
 
-![head/end versus data/tail pointers](https://s2.loli.net/2023/04/21/NAYkqDIVCwS3cFW.png)
+![head/end versus data/tail pointers](https://s2.loli.net/2024/04/03/uaKsCnXPf6Tyk75.png)
 
 每一层能够在 `head` 和 `data` 之间的区域填充协议头，或者在 `tail` 和 `end` 之间的区域填充新的数据。
 
@@ -150,7 +150,7 @@ struct sk_buff {
 - 处理第 n 层的函数会为此层初始化适当的指针（例如，L3 的处理函数会为 `skb->nh` 赋值）以保留 `skb->data` 字段，因为当 `skb->data` 被赋值为 buffer 内的其他偏移量时，该指针的内容将在下一层的处理过程中丢失。
 - 该函数完成第 n 层的处理，并在将数据包传递到第 n+1 层处理程序之前，更新 `skb->data` 使其指向第 n 层协议头的末尾（即第 n+1 层协议头的开始位置）
 
-![Header's pointer initializations while moving from layer two to layer three](https://s2.loli.net/2023/04/21/lWCyjnVxNgf5RIA.png)
+![Header's pointer initializations while moving from layer two to layer three](https://s2.loli.net/2024/04/03/bOusozE75ICwhkR.png)
 
 下面说一下 control buffer ，它用来存储一些私有信息，由各层维护以供内部使用。它是在 `sk_buff` 结构中静态分配的（当前大小为40个字节），并且足够大以容纳每一层所需的任何私有数据。在每一层的代码中，访问都是通过宏进行的，以使代码更具可读性。例如，TCP使用该空间存储 `tcp_skb_cb` 数据结构，该数据结构在 `include/net/tcp.h` 中定义：
 
@@ -299,7 +299,7 @@ nodata:
 
 在调用 `kmalloc` 之前，使用宏 `SKB_DATA_ALIGN` 调整了大小参数以强制对齐。返回之前，该函数将初始化结构体中的一些参数，从而产生下图所示的最终结果：
 
-![alloc_skb function](https://s2.loli.net/2023/04/21/PKuO6jrDbCe8I3W.png)
+![alloc_skb function](https://s2.loli.net/2024/04/03/Vbf43YJQFZXHLDK.png)
 
 在图右侧存储块的底部，可以看到为了强制对齐而引入的 Padding 区域。 `skb_shared_info` 块主要用于处理 IP 的分片（IP 协议根据 MTU 和 MSS 对数据包进行的分片传输）。
 
@@ -344,7 +344,7 @@ void kfree_skb(struct sk_buff *skb)
 
 `kfree_skb` 仅在 `skb->users` 计数器为1时（没有缓冲区的用户时）才释放缓冲区。 否则，该函数只会使该计数器递减。因此，如果一个缓冲区有三个用户，则只有当调用第三次 `dev_kfree_skb` 或 `kfree_skb` 时才会真正释放内存。
 
-![kfree_skb function](https://s2.loli.net/2023/04/21/rgj6Ry3tsqPxwAe.png)
+![kfree_skb function](https://s2.loli.net/2024/04/03/tfjp9dnZHoIiURN.png)
 
 ## 数据保留和对齐
 
@@ -355,7 +355,7 @@ void kfree_skb(struct sk_buff *skb)
 
 下图为分别对 `sk_buff` 执行 `skb_put`(a)，`skb_push`(b)，`skb_pull`(c)，`skb_reserve`(d) 的前后对比：
 
-![Before and after: (a)skb_put, (b)skb_push, (c)skb_pull, and (d)skb_reserve](https://s2.loli.net/2023/04/21/cox8KyGBrSw2v1d.png)
+![Before and after: (a)skb_put, (b)skb_push, (c)skb_pull, and (d)skb_reserve](https://s2.loli.net/2024/04/03/e4bcOrAKzRG78gn.png)
 
 ### skb_put
 
@@ -420,11 +420,11 @@ skb_reserve(skb, 2);	/* Align IP on 16 byte boundaries */
 
 因为他们知道他们将要把协议头为 14 个字节的以太网帧复制到缓冲区中，所以参数 2 将缓冲区的 `head` 指针下移了 2 个字节。这将让紧跟在以太网头之后的 IP 头，从缓冲区的开头在 16 字节边界上对齐。
 
-![(a) before skb_reserve, (b) after skb_reserve, and (c) after copying the frame on the buffer](https://s2.loli.net/2023/04/21/urwZ5E1y3U4soOx.png)
+![(a) before skb_reserve, (b) after skb_reserve, and (c) after copying the frame on the buffer](https://s2.loli.net/2024/04/03/zU2VeWqCj6Ov4F7.png)
 
 下图展示了 `skb_reserve` 在数据从上到下传递（发送数据）时的作用（为下层协议在数据区的头部分配空间）：
 
-![Buffer that is filled in while traversing the stack from the TCP layer down to the link layer](https://s2.loli.net/2023/04/21/qkhPyA9grEODTSa.png)
+![Buffer that is filled in while traversing the stack from the TCP layer down to the link layer](https://s2.loli.net/2024/04/03/IeoY4Ptam6xsbDw.png)
 
 - 当要求 TCP 传输某些数据时，它会按照某些条件（TCP Max Segment Size(mss)，对分散收集 I/O 支持等）分配一个缓冲区。
 - TCP 在缓冲区的头部保留（通过调用 `skb_reserve`）足够的空间，以容纳所有层（TCP，IP，Link 层）的所有协议头。参数 `MAX_TCP_HEADER` 是所有级别的所有协议头的总和，并考虑到最坏的情况：因为 TCP 层不知道将使用哪种类型的接口进行传输，因此它为每个层保留最大的标头。它甚至考虑到多个 IP 协议头的可能性（因为当内核编译为支持 IP in IP 时，你可以拥有多个IP 协议头）。
@@ -502,7 +502,7 @@ static struct sk_buff *__skb_clone(struct sk_buff *n, struct sk_buff *skb)
 
 下图为一个被分段（一个缓冲区，其中一些数据存储在与 `frags` 数组链接的数据片段中）了的缓冲区克隆的例子:
 
-![skb_clone function](https://s2.loli.net/2023/04/21/KtbcL7sxT2aoPg5.png)
+![skb_clone function](https://s2.loli.net/2024/04/03/Xy96ZWPxKGum32C.png)
 
 ### pskb_copy 与 skb_copy
 
@@ -513,7 +513,7 @@ static struct sk_buff *__skb_clone(struct sk_buff *n, struct sk_buff *skb)
 
 `pskb_copy` 和 `skb_copy` 的不同如下图中的(a)和(b):
 
-![(a) pskb_copy function and (b) skb_copy function](https://s2.loli.net/2023/04/21/ISOGCoher1WVlu2.png)
+![(a) pskb_copy function and (b) skb_copy function](https://s2.loli.net/2024/04/03/RenJrMwbf6uNxZI.png)
 
 在决定克隆或复制缓冲区时，每个子系统的程序员都无法预料其他内核组件（或其子系统的其他用户）是否需要该缓冲区中的原始信息。内核是非常模块化的，并且以非常动态和不可预测的方式进行更改，因此每个子系统都不知道其他子系统可以使用缓冲区做什么。因此，每个子系统的程序员只需跟踪他们对缓冲区所做的任何修改，并注意**在修改任何内容之前先进行复制，以防内核的其他部分需要原始信息**。
 

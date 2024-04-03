@@ -2,8 +2,8 @@
 title: nvdimm 技术与编程模型概览
 date: 2022-07-18 16:45:16
 updated: 2023-04-18 13:49:02
-cover: https://s2.loli.net/2022/07/27/qNvb2iJmUzGPH1t.png
-thumbnail: https://s2.loli.net/2022/07/27/qNvb2iJmUzGPH1t.png
+cover: https://s2.loli.net/2024/04/03/KAQofgkrGDpNdhz.png
+thumbnail: https://s2.loli.net/2024/04/03/KAQofgkrGDpNdhz.png
 categories:
 - 硬件
 tags:
@@ -39,13 +39,13 @@ nvdimm，即非易失性双列直插式内存模块（non-volatile DIMM），相
 
 #### NVM Block Mode
 
-![NVM Block Mode](https://s2.loli.net/2022/07/28/XtqEZyMAUaG84pu.png)
+![NVM Block Mode](https://s2.loli.net/2024/04/03/iGZfToYMF36Kqhn.png)
 
 上图表示了常见软件栈的一部分，红线表示了 NVM Block Mode 的接口，这里的接口指的是块读写接口。可以看到，在这个模型中驱动向文件系统等内核模块或直接向应用程序（如直接打开 /dev/sda1 设备）提供了传统块读写接口。为了使这种传统的接口更好的支持非易失性内存设备，可能需要对它进行功能上的扩展，以得到 I/O 性能的优化，例如一些原子操作的支持，向应用程序提供非易失性内存的某些属性等。通过将这种扩展标准化，能够为软件编写者提供一个更有效的生态系统来开发非易失性内存感知的应用程序。
 
 #### NVM File Mode
 
-![NVM File Mode](https://s2.loli.net/2022/07/28/DyOWe15t79fRSLh.png)
+![NVM File Mode](https://s2.loli.net/2024/04/03/fNTQLtgeyE23s5r.png)
 
 NVM File Mode 模式中主要关注的是应用程序和文件系统间的文件接口。和 NVM Block Mode 一样，为了更好的支持非易失性内存设备，文件接口可能需要进行一些扩展。
 
@@ -53,7 +53,7 @@ NVM File Mode 模式中主要关注的是应用程序和文件系统间的文件
 
 #### PM Volume Mode
 
-![PM Volume Mode](https://s2.loli.net/2022/07/28/9GnibhJySAfvmUt.png)
+![PM Volume Mode](https://s2.loli.net/2024/04/03/wITnqpfKtZxsm9R.png)
 
 如上图，在 PM Volume Mode 中，非易失性内存设备（NVM devices）是支持 PM 的，意味着设备可以通过处理器的 load 和 store 指令直接操作。尽管任何储存元件都可能通过一种处理器可以直接从中加载数据的方式连接到系统，但 NAND Flash 等技术会使处理器在加载时暂停，使得这种连接方式难以实现。更先进的非易失性内存设备和缓存技术使得这种方式成为可能。
 
@@ -61,7 +61,7 @@ NVM File Mode 模式中主要关注的是应用程序和文件系统间的文件
 
 #### PM File Mode
 
-![PM File Mode](https://s2.loli.net/2022/07/28/vDwTH3WzYe56amu.png)
+![PM File Mode](https://s2.loli.net/2024/04/03/dxfROiUTYDJNjoI.png)
 
 PM File Mode 看起来和 NVM File Mode 有些相似，但不同的是这里的文件系统是感知 PM 的，可以看到这种文件系统就是通过上文的 PM Volume Mode 模型实现的。
 
@@ -89,7 +89,7 @@ ptr = pm_malloc(len); /* the naïve solution */
 
 持久内存对于那些需要储存数组、树、堆等数据结构的应用来说很方便，应用可以利用文件 api 映射持久内存来直接访问这些结构。这带来了有关地址无关的数据结构的问题。
 
-![典型进程地址空间](https://s2.loli.net/2022/08/16/5iWeK34PTRsoLzX.png)
+![典型进程地址空间](https://s2.loli.net/2024/04/03/hIgy6vjoPTDMq2R.png)
 
 如上图，进程通过内存映射的方式访问持久内存，持久内存和其他映射到内存的文件（如共享库）一起被映射到内存空间中。各个区域之间有一些带状的空间（阴影部分区域），这片空间的具体大小通常是随机的，这是一种缓解某些类攻击的安全机制。这使得储存在持久内存上的数据结构中的指针会在第二次运行时变得无效，如上图的右侧部分所示。尽管这个问题在映射到内存的文件中就存在了，持久内存的出现使其变得更加普遍。
 
@@ -99,7 +99,7 @@ ptr = pm_malloc(len); /* the naïve solution */
 
 计算机系统的主存储器通常通过纠错码（ECC）等机制来防止错误。当该内存被应用程序使用时，应用程序通常不处理错误，可纠正的错误被纠正的过程对应用程序而言是透明的（这些错误通常被记录下来供管理员使用）。对于不可纠正的错误，操作系统在可能的情况下可以修复被破坏的应用程序内存（例如，如果内存内容没有被修改，可以重新从磁盘读取数据）。但总会有程序状态被破坏，无法安全的继续运行程序的情况。在大多数 UNIX 系统中，受影响的程序在这种情况下被杀死，UNIX 信号 SIGBUS 最常在此时被使用。
 
-![MCA 处理流程](https://s2.loli.net/2022/08/16/xUQEf5bjG1oSXyK.png)
+![MCA 处理流程](https://s2.loli.net/2024/04/03/jiaAwCQkyDsHYWI.png)
 
 PM 的错误处理初看起来和内存相似，以在 Intel 架构上运行的 Linux 为例，内存错误是通过英特尔的 Machine Check Architecture（MCA）来报告的。当操作系统启用这一功能时，上图中的红色实心箭头显示了不可纠正错误的处理流程，当发生错误的位置被访问时，mcheck 模块会收到通知。
 

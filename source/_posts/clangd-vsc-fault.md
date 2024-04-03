@@ -27,21 +27,21 @@ macOS 上附带的 llvm 是 Apple 自己管理的，属于 Xcode 的一部分，
 
 打开输出窗口看了下 clangd 插件的日志，报了一个 `Signalled during AST worker action: InlayHints` 错误，看起来是被某个信号中断了（其实当时通过这个大概能推测到是某个 bug 导致访问了非法内存地址）。这里 InlayHints 其实指的就是 vscode 中指针处在符号上方后会跳出来的悬浮嵌入提示，也就是 clangd 插件向 clangd server 请求提示信息时发生的错误。
 
-![错误输出](https://s2.loli.net/2023/05/19/FQ1HDPUSep2EaIw.png)
+![错误输出](https://s2.loli.net/2024/04/03/coFzrZBxiG4RV5k.png)
 
 Google 了下只找到了一个似乎比较符合目前情况的 [issue](https://github.com/clangd/clangd/issues/1120)，很巧的是他也是在用 clangd 分析内核代码时出现的（而且是访问了空指针导致的）。
 
 不过我的输出中并没有栈回溯，不知道是不是 Apple 版的 clangd 去掉了栈回溯打印，因此还不能完全确定就是同一个问题。不过他提到了错误是 `EXPORT_SYMBOL` 宏展开后的代码导致的问题，因此我只留下两个没有 `EXPORT_SYMBOL` 宏的源文件，重启 vscode...
 
-![没有 EXPORT_SYMBOL，一切正常](https://s2.loli.net/2023/05/19/KBxtWy3ORpMfjGq.png)
+![没有 EXPORT_SYMBOL，一切正常](https://s2.loli.net/2024/04/03/YN9UocWt63AH7xI.png)
 
 这次并没有崩溃，嵌入提示也在这个源文件中正常工作了。目前差不多能确定是同一个问题了，为了再次确认下，我想到既然他自己不打印，我可以挂 lldb 自己看啊～
 
-![挂上 lldb](https://s2.loli.net/2023/05/19/biv4y13TLYMEoZu.png)
+![挂上 lldb](https://s2.loli.net/2024/04/03/Mkzj4SXOWvdmcDY.png)
 
 只见我一个 attach，马上抓到了内存访问异常——
 
-![异常栈回溯](https://s2.loli.net/2023/05/19/W4eavFUY6ThztpQ.png)
+![异常栈回溯](https://s2.loli.net/2024/04/03/vWR2qg5NFxYAS64.png)
 
 直接贴一下内容：
 
@@ -75,9 +75,9 @@ Target 0: (clangd) stopped.
 
 不过我还有最后一个疑问，这个 issue 被提出来的时间距今已过去一年了。我确认了下 clangd 的版本，clangd 的版本号和 clang 是一致的，我系统中的版本目前是 14.0.3。目前 llvm 主线已经到 16.0.4 了，而主线的 14.0.3 是在2022年4月29日发布的。也就是说 Apple 的 llvm 落后于主线大概一年，而这个问题的修复 commit 刚好在 14.0.3 发布的一周后，也就是说并不包括在 14.0.3 中。不过话说这么久的必现崩溃问题不应该早就向后移植了吗，难道 Apple 的 llvm 团队在更新的时候只把编译器相关的问题向后移植了下，这个小小（？）的 clangd 问题就忽略了？
 
-![clangd 版本](https://s2.loli.net/2023/05/19/RTW8s2QO1eYxAhg.png)
+![clangd 版本](https://s2.loli.net/2024/04/03/rkCaAnHJfF8Usx6.png)
 
-![Xcode 版本](https://s2.loli.net/2023/05/19/gAvtwyS8WZRO5af.png)
+![Xcode 版本](https://s2.loli.net/2024/04/03/r7gdKfTjLyw4SD1.png)
 
 又去[这个网站](https://xcodereleases.com/alpha.html)看了下 Xcode 版本对应的 Clang 版本，最新一次 Xcode 更新确实将 clang 从 14.0.0 更新到了 14.0.3，这一切也就说得通了。
 
@@ -85,6 +85,6 @@ Target 0: (clangd) stopped.
 
 终于，clangd 愉快的跑了起来，vscode 的嵌入提示也能正常显示了！
 
-![恢复正常了！可喜可贺！](https://s2.loli.net/2023/05/19/AghnrWmdsq6butQ.png)
+![恢复正常了！可喜可贺！](https://s2.loli.net/2024/04/03/xQSbC6e32vO7YHB.png)
 
 这个问题也让我想到了之前看到老雷发现的 Visual Studio 问题也是访问空指针（具体[在这](https://mp.weixin.qq.com/s/ezPkE6ZUNr5lQFRGSwRI_A)），即便是大公司发布的看起来可靠稳定的开发工具有时候还是会出 bug 的 ^ ^

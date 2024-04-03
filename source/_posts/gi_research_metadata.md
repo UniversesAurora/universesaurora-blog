@@ -2,8 +2,8 @@
 title: 小探 GI global-metadata
 date: 2022-06-10 20:07:34
 updated: 2022-07-18 16:42:29
-cover: https://s2.loli.net/2022/06/10/ztySZrhFvx9wQfN.jpg
-thumbnail: https://s2.loli.net/2022/06/10/ztySZrhFvx9wQfN.jpg
+cover: https://s2.loli.net/2024/04/03/sRTiEngD37AXQS6.png
+thumbnail: https://s2.loli.net/2024/04/03/sRTiEngD37AXQS6.png
 categories:
 - 逆向
 tags:
@@ -59,17 +59,17 @@ toc: true
 
 用二进制编辑器看了下 metadata 文件，头部的标志已经没有了，和之前版本的对比了下也没看出来什么门道。我首先想到的是抓抓系统调用看看打开 metadata 文件的前后发生了些啥，然而抓了后又把 map/read 之类操作和 metadata 文件对了下，依然看不出什么东西，显然这种简单的分析是完全没用的。更诡异的是运行几次后连 read 都抓不到了，难不成这东西还有缓存的？
 
-![Process Monitor 记录](https://s2.loli.net/2022/06/10/VgBNwJjQX9mWU82.png)
+![Process Monitor 记录](https://s2.loli.net/2024/04/03/hfstbQ7xYXHlL6A.png)
 
 ## 分析 UserAssembly.dll
 
 于是把 UserAssembly.dll 丢进 ida 分析了下。直接搜索字符串 global-metadata，找到了看起来可能是打开文件的地方：
 
-![疑似打开文件](https://s2.loli.net/2022/06/10/ZbP5GaLAdsYv2D9.png)
+![疑似打开文件](https://s2.loli.net/2024/04/03/l8Sg1sK3fNZ579v.png)
 
 于是我参考了网上相关文章研究了下，怀疑到下面有一处调用的解密函数，这个函数初始化在一个导出函数中，其中还初始化了另一个函数。
 
-![初始化解密函数](https://s2.loli.net/2022/06/10/E4GAKo6kPxJReO8.png)
+![初始化解密函数](https://s2.loli.net/2024/04/03/PnVLSlZ4Br1cY9t.png)
 
 不过解密函数目前来看都不在这个 dll 中，四处翻了翻后我就暂时结束了对 UserAssembly.dll 的探索。
 
@@ -77,7 +77,7 @@ toc: true
 
 接下来我把目光转向了 Il2CppDumper，想通过它分析下之前版本的 metadata 是怎么解密出来的（没找到这个被修改过的 Il2CppDumper 源码）（更新：其实是有源码的，在另一个[仓库](https://github.com/Three-taile-dragon/MelonLoader-GenshinImpact)）。于是把他丢进 ida，搜索打印的 log 字符串 "Initializing metadata..."，很快我就发现了一个叫做 DecryptMetadata 的函数，显然是解密函数：
 
-![DecryptMetadata](https://s2.loli.net/2022/06/10/SQeip7WVCR6atUl.png)
+![DecryptMetadata](https://s2.loli.net/2024/04/03/GWz6xik3fAShbCy.png)
 
 ida 好像反汇编不了 .net 的程序，换个反编译工具 dnSpy，这下源码基本完全解析出来了。首先动态调试了下，找到异常抛出的位置向前回溯，发现问题出自 header.metadataUsageListsCount 为 0，这个 header 又是通过之前解密的 metadata 数据初始化出来的，这样看 metadata 果然还是没有被正确解密。
 
@@ -125,7 +125,7 @@ private_server_launch.cmd 127.0.0.1 443 true "<YuanShen.exe 路径>" "<GrassClip
 
 搭好调试环境后，我发现这游戏主程序加了壳的没法直接调试（废话），想在游戏过程中挂 x64dbg 也挂不上，不知道用了什么魔法。另外游戏会不断检查并尝试杀掉 x64dbg 等调试器，启动时也会检查，以及如果杀不掉甚至游戏直接退出。所以这个部分遇到了点困难。
 
-![本体有 vmp 壳](https://s2.loli.net/2022/06/10/JWm9QEqiTSVgLX3.png)
+![本体有 vmp 壳](https://s2.loli.net/2024/04/03/9UpEjDZofeK2kwd.png)
 
 ## 尝试新的 Il2CppDumper
 
