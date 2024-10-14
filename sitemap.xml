@@ -194,6 +194,13 @@
   </url>
   
   <url>
+    <loc>https://universesaurora.top/tags/%E9%9A%8F%E7%AC%94/</loc>
+    <lastmod>2024-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://universesaurora.top/tags/%E7%A1%AC%E4%BB%B6/</loc>
     <lastmod>2024-10-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -202,13 +209,6 @@
   
   <url>
     <loc>https://universesaurora.top/tags/nvdimm/</loc>
-    <lastmod>2024-10-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://universesaurora.top/tags/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2024-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -245,14 +245,14 @@
   </url>
   
   <url>
-    <loc>https://universesaurora.top/categories/%E7%A1%AC%E4%BB%B6/</loc>
+    <loc>https://universesaurora.top/categories/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2024-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://universesaurora.top/categories/%E9%9A%8F%E7%AC%94/</loc>
+    <loc>https://universesaurora.top/categories/%E7%A1%AC%E4%BB%B6/</loc>
     <lastmod>2024-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
