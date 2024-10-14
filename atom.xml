@@ -111,11 +111,11 @@
     <category term="内核" scheme="https://universesaurora.top/categories/%E5%86%85%E6%A0%B8/"/>
     
     
-    <category term="网络" scheme="https://universesaurora.top/tags/%E7%BD%91%E7%BB%9C/"/>
-    
     <category term="内核" scheme="https://universesaurora.top/tags/%E5%86%85%E6%A0%B8/"/>
     
     <category term="Linux" scheme="https://universesaurora.top/tags/Linux/"/>
+    
+    <category term="网络" scheme="https://universesaurora.top/tags/%E7%BD%91%E7%BB%9C/"/>
     
     <category term="sk_buff" scheme="https://universesaurora.top/tags/sk-buff/"/>
     
