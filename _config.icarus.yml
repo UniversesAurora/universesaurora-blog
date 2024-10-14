@@ -196,5 +196,5 @@ plugins:
         pixel_id: 
 providers:
     cdn: '[cdnjs]https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-d/${package}/${version}/${filename}'
-    fontcdn: 'https://fonts.googlefonts.cn/${type}?family=${fontname}'
+    fontcdn: 'https://google-fonts.mirrors.sjtug.sjtu.edu.cn/${type}?family=${fontname}'
     iconcdn: 'https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-d/font-awesome/5.15.4/css/all.min.css'
