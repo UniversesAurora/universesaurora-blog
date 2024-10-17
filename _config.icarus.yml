@@ -121,9 +121,9 @@ widgets:
             Mastodon:
                 icon: fab fa-mastodon
                 url: https://mastodon.social/@universesaurora
-            Twitter:
+            Bluesky:
                 icon: fab fa-twitter
-                url: https://twitter.com/universesaurora
+                url: https://bsky.app/profile/universesaurora.bsky.social
             Github:
                 icon: fab fa-github
                 url: https://github.com/UniversesAurora
