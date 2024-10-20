@@ -30,7 +30,7 @@ widgets:
         # Email address for the Gravatar
         gravatar: 
         # URL or path for the follow button
-        follow_link: https://twitter.com/universesaurora
+        follow_link: https://mastodon.social/@universesaurora
         # Links to be shown on the bottom of the profile widget
         social_links:
             Telegram:

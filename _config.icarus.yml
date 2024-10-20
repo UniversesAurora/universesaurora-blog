@@ -113,7 +113,7 @@ widgets:
         avatar: /img/avatar.png
         avatar_rounded: true
         gravatar: 
-        follow_link: https://twitter.com/universesaurora
+        follow_link: https://mastodon.social/@universesaurora
         social_links:
             Telegram:
                 icon: fab fa-telegram
